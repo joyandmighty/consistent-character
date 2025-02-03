@@ -5,6 +5,32 @@ set -e  # Exit the script if any statement returns a non-true return value
 #                          Function Definitions                                #
 # ---------------------------------------------------------------------------- #
 
+# Format text to fit in box with ellipsis if needed
+format_text() {
+    local text="$1"
+    local max_length=$2
+    if [ ${#text} -gt $max_length ]; then
+        echo "${text:0:$((max_length-3))}..."
+    else
+        printf "%-${max_length}s" "$text"
+    fi
+}
+
+# Format version string
+format_version() {
+    local version=$(cat /VERSION)
+    format_text "$version" 12
+}
+
+# Create centered text
+center_text() {
+    local text="$1"
+    local width=70  # Total width inside box
+    local text_length=${#text}
+    local padding=$(( (width - text_length) / 2 ))
+    printf "%${padding}s%s%*s" "" "$text" $((width - padding - text_length)) ""
+}
+
 # Start nginx service
 start_nginx() {
     echo "Starting Nginx service..."
@@ -29,7 +55,19 @@ setup_ssh() {
         echo "$PUBLIC_KEY" >> ~/.ssh/authorized_keys
         chmod 700 -R ~/.ssh
 
-         if [ ! -f /etc/ssh/ssh_host_rsa_key ]; then
+        # Configure welcome message
+        echo "
++--------------------------------------------------------------------------+
+|                                                                          |
+|$(center_text "CONSISTENT CHARACTER SETUP")|
+|                                                                          |
+|  $(format_text "https://github.com/imamik/consistent-character" 65)|
+|                                                                          |
+|  Version: $(format_version)                                              |
+|                                                                          |
++--------------------------------------------------------------------------+" > /etc/motd
+
+        if [ ! -f /etc/ssh/ssh_host_rsa_key ]; then
             ssh-keygen -t rsa -f /etc/ssh/ssh_host_rsa_key -q -N ''
             echo "RSA key fingerprint:"
             ssh-keygen -lf /etc/ssh/ssh_host_rsa_key.pub
@@ -68,16 +106,6 @@ export_env_vars() {
     echo "Exporting environment variables..."
     printenv | grep -E '^RUNPOD_|^PATH=|^_=' | awk -F = '{ print "export " $1 "=\"" $2 "\"" }' >> /etc/rp_environment
     echo 'source /etc/rp_environment' >> ~/.bashrc
-}
-
-# Start jupyter lab
-start_jupyter() {
-    if [[ $JUPYTER_PASSWORD ]]; then
-        echo "Starting Jupyter Lab..."
-        cd / && \
-        nohup jupyter lab --allow-root --no-browser --port=8888 --ip=* --FileContentsManager.delete_to_trash=False --ServerApp.terminado_settings='{"shell_command":["/bin/bash"]}' --ServerApp.token=$JUPYTER_PASSWORD --ServerApp.allow_origin=* --ServerApp.preferred_dir=/ComfyUI &> /jupyter.log &
-        echo "Jupyter Lab started"
-    fi
 }
 
 # ---------------------------------------------------------------------------- #
