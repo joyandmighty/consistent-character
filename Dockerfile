@@ -96,7 +96,7 @@ COPY proxy/readme.html /usr/share/nginx/html/readme.html
 COPY README.md /usr/share/nginx/html/README.md
 
 # Copy the ComfyUI data
-COPY ComfyUI/ /ComfyUI/
+COPY input/ /ComfyUI/input/
 
 # Start Scripts
 COPY scripts/ /
