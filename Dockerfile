@@ -1,4 +1,4 @@
-FROM nvidia/cuda:12.4.1-base-ubuntu20.04 AS base
+FROM nvidia/cuda:12.1.0-base-ubuntu20.04 AS base
 
 # Add version argument and label
 ARG VERSION="dev"
@@ -51,7 +51,7 @@ RUN pip install --upgrade --no-cache-dir jupyter
 # Install dependencies in the correct order with specific versions
 RUN pip install --upgrade --no-cache-dir huggingface_hub && \
     pip install --upgrade --no-cache-dir diffusers && \
-    pip install --upgrade --no-cache-dir torch torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/cu124 && \
+    pip install --upgrade --no-cache-dir torch torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/cu121 && \
     pip install --upgrade --no-cache-dir xformers
 
 # Install StreamDiffusion dependencies first
