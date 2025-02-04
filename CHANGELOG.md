@@ -1,3 +1,29 @@
+# 🔖 1.2.0 (2025-02-04)
+
+## Docker Image
+
+```bash
+# Latest version
+docker pull ghcr.io/imamik/consistent-character:1.2.0
+
+# Or use latest tag
+docker pull ghcr.io/imamik/consistent-character:latest
+```
+
+## Changes
+
+### 🚀 Features
+
+* download ClearReality upscale models instead of embedding ([54d0439](https://github.com/imamik/consistent-character/commit/54d043928f0589f206c4f458d3aecbd2534e7bc8))
+
+### 📚 Documentation
+
+* Update README with Jupyter Notebook and model volume mount instructions ([191c680](https://github.com/imamik/consistent-character/commit/191c680128284b5ff1e484a8308b31ac3690e331))
+
+### ♻️ Refactor
+
+* add input directory support for ComfyUI and Dockerfile ([9588c23](https://github.com/imamik/consistent-character/commit/9588c234e6e17a0df03e045539c060dee32cdeb2))
+
 # 🔖 1.1.0 (2025-02-04)
 
 ## Docker Image
