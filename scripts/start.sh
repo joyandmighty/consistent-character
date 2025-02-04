@@ -119,7 +119,6 @@ execute_script "/pre_start.sh" "Running pre-start script..."
 echo "Pod Started"
 
 setup_ssh
-start_jupyter
 export_env_vars
 
 execute_script "/post_start.sh" "Running post-start script..."
