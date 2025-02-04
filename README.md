@@ -60,16 +60,20 @@ docker pull ghcr.io/imamik/consistent-character:latest
 docker run -it --gpus all \
   -p 3000:3000 \
   -p 4040:4040 \
-  -v /path/to/your/inputs:/opt/ComfyUI/input \
-  -v /path/to/your/outputs:/opt/ComfyUI/output \
+  -p 8080:8080 \
+  -v /path/to/your/inputs:/workspace/input \
+  -v /path/to/your/outputs:/workspace/output \
+  -v /path/to/your/models:/workspace/models \
   ghcr.io/imamik/consistent-character:latest
 
 # Access ComfyUI at http://localhost:3000
 # Access file browser at http://localhost:4040
+# Access Jupyter Notebook at http://localhost:8080
 ```
 
-Note: Replace `/path/to/your/inputs` and `/path/to/your/outputs` with your
-actual local paths for input and output directories.
+Note: Replace `/path/to/your/inputs`, `/path/to/your/outputs`, and
+`/path/to/your/models` with your actual local paths for input, output, and
+models directories.
 
 ## Docker Image
 
