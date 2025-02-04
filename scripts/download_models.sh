@@ -64,6 +64,12 @@ download_model \
 download_model \
     "https://huggingface.co/Kim2091/UltraSharp/resolve/main/4x-UltraSharp.pth" \
     "$WORKSPACE_PATH/upscale_models/4x-UltraSharp.pth"
+download_model \
+    "https://huggingface.co/Kim2091/ClearRealityV1/resolve/main/4x-ClearRealityV1.safetensors?download=true" \
+    "$WORKSPACE_PATH/upscale_models/4x-ClearRealityV1.safetensors"
+download_model \
+    "https://huggingface.co/Kim2091/ClearRealityV1/resolve/main/4x-ClearRealityV1_Soft.safetensors?download=true" \
+    "$WORKSPACE_PATH/upscale_models/4x-ClearRealityV1_Soft.safetensors"
 
 # ControlNet Union SDXL
 download_model \
