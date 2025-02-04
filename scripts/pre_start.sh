@@ -14,6 +14,9 @@ ln -sf /workspace/models /ComfyUI/models
 # Start filebrowser
 filebrowser --address=0.0.0.0 --port=4040 --root=/ --noauth &
 
+# Start Jupyter Notebook
+jupyter notebook --ip=0.0.0.0 --port=8080 --allow-root --no-browser &
+
 cd /ComfyUI || exit 1
 python main.py --listen --port 3000 --output-directory /workspace/output &
 

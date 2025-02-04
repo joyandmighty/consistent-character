@@ -45,6 +45,9 @@ RUN pip install --upgrade --no-cache-dir pip && \
     pip install --upgrade setuptools && \
     pip install --upgrade wheel
 
+# Install Jupyter Notebook
+RUN pip install --upgrade --no-cache-dir jupyter
+
 # Install dependencies in the correct order with specific versions
 RUN pip install --upgrade --no-cache-dir huggingface_hub && \
     pip install --upgrade --no-cache-dir diffusers && \
