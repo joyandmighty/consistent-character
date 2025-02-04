@@ -1,3 +1,25 @@
+# 🔖 1.1.0 (2025-02-04)
+
+## Docker Image
+
+```bash
+# Latest version
+docker pull ghcr.io/imamik/consistent-character:1.1.0
+
+# Or use latest tag
+docker pull ghcr.io/imamik/consistent-character:latest
+```
+
+## Changes
+
+### 🚀 Features
+
+* Add Jupyter Notebook support to Docker image and startup scripts ([eeb52e4](https://github.com/imamik/consistent-character/commit/eeb52e41f62ee77413f4378ae22ac673a8453e45))
+
+### 🐛 Bug Fixes
+
+* update CUDA and PyTorch versions to 12.1.0 to increase compatibility ([dc2e07f](https://github.com/imamik/consistent-character/commit/dc2e07f6a5684cba882e60a794f6adf9235a934f))
+
 # 🔖 1.0.1 (2025-02-04)
 
 ## Docker Image
