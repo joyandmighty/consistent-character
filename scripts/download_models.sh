@@ -34,7 +34,6 @@ download_model() {
     # Increment counter and start download in background
     ((current_downloads++))
     (
-        echo "Downloading $(basename "$dest")..."
         if wget -q -O "$dest" "$url"; then
             echo "✅ Completed downloading $(basename "$dest")"
         else
