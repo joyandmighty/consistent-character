@@ -76,21 +76,10 @@ RUN mkdir -p /invokeai && \
     uv pip install invokeai --python 3.12 --python-preference only-managed --force-reinstall
 
 # Install Filebrowser
-# Create a non-root user for brew install
-RUN useradd -m brewuser && \
-    echo "brewuser ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers && \
-    mkdir -p /home/linuxbrew/.linuxbrew && \
-    chown -R brewuser:brewuser /home/linuxbrew/.linuxbrew
-# Switch to the non-root user
-USER brewuser
-RUN /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-ENV PATH="/home/linuxbrew/.linuxbrew/bin:${PATH}"
-RUN brew update && brew install gcc && brew install pyenv
-RUN brew tap filebrowser/tap && HOMEBREW_NO_INSTALLED_DEPENDENTS_CHECK=1 brew install filebrowser
-# Temporary while bash path gets fixed https://github.com/astral-sh/uv/issues/1586
-RUN brew install uv
-# Switch back to root 
-USER root
+RUN curl -fsSL https://raw.githubusercontent.com/filebrowser/get/master/get.sh | bash
+
+# Install uv directly
+RUN curl -LsSf https://astral.sh/uv/install.sh | sh
 
 # NGINX Proxy
 COPY proxy/nginx.conf /etc/nginx/nginx.conf
