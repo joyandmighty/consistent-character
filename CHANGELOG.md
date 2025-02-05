@@ -1,3 +1,29 @@
+# 🔖 1.3.0 (2025-02-05)
+
+## Docker Image
+
+```bash
+# Latest version
+docker pull ghcr.io/imamik/consistent-character:1.3.0
+
+# Or use latest tag
+docker pull ghcr.io/imamik/consistent-character:latest
+```
+
+## Changes
+
+### 🚀 Features
+
+* Add InvokeAI to Docker image and startup scripts ([834e93d](https://github.com/imamik/consistent-character/commit/834e93d1f04276803cb07f9a12bed44f80d4debf))
+
+### 🐛 Bug Fixes
+
+* remove unnecessary system libraries from Dockerfile ([f690f05](https://github.com/imamik/consistent-character/commit/f690f05eaa58636881c0004218d9e73260ad6bb5))
+
+### 🔧 Maintenance
+
+* Simplify Dockerfile installation steps for Filebrowser and uv ([cba1532](https://github.com/imamik/consistent-character/commit/cba1532a18a386d9df61c76f2d3a70488466bae2))
+
 # 🔖 1.2.0 (2025-02-04)
 
 ## Docker Image
