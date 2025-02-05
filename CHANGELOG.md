@@ -1,3 +1,21 @@
+# 🔖 1.3.1 (2025-02-05)
+
+## Docker Image
+
+```bash
+# Latest version
+docker pull ghcr.io/imamik/consistent-character:1.3.1
+
+# Or use latest tag
+docker pull ghcr.io/imamik/consistent-character:latest
+```
+
+## Changes
+
+### 🔧 Maintenance
+
+* Remove Jupyter Notebook, InvokeAI, and related configurations ([20d5930](https://github.com/imamik/consistent-character/commit/20d593081a34212b77d7275e4edf0b7fa0d2b9ad))
+
 # 🔖 1.3.0 (2025-02-05)
 
 ## Docker Image
