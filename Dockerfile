@@ -45,9 +45,6 @@ RUN pip install --upgrade --no-cache-dir pip && \
     pip install --upgrade setuptools && \
     pip install --upgrade wheel
 
-# Install Jupyter Notebook
-RUN pip install --upgrade --no-cache-dir jupyter
-
 # Install dependencies in the correct order with specific versions
 RUN pip install --upgrade --no-cache-dir huggingface_hub && \
     pip install --upgrade --no-cache-dir diffusers && \
@@ -69,11 +66,6 @@ RUN git clone https://github.com/comfyanonymous/ComfyUI.git && \
     git clone https://github.com/ltdrdata/ComfyUI-Manager.git custom_nodes/ComfyUI-Manager && \
     cd custom_nodes/ComfyUI-Manager && \
     pip install -r requirements.txt
-
-# Install InvokeAI
-RUN mkdir -p /invokeai && \
-    cd /invokeai && \
-    uv pip install invokeai --python 3.12 --python-preference only-managed --force-reinstall
 
 # Install Filebrowser
 RUN curl -fsSL https://raw.githubusercontent.com/filebrowser/get/master/get.sh | bash

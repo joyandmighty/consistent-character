@@ -68,7 +68,6 @@ docker run -it --gpus all \
 
 # Access ComfyUI at http://localhost:3000
 # Access file browser at http://localhost:4040
-# Access Jupyter Notebook at http://localhost:8080
 ```
 
 Note: Replace `/path/to/your/inputs`, `/path/to/your/outputs`, and
