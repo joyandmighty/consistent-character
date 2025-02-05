@@ -52,7 +52,8 @@ RUN pip install --upgrade --no-cache-dir jupyter
 RUN pip install --upgrade --no-cache-dir huggingface_hub && \
     pip install --upgrade --no-cache-dir diffusers && \
     pip install --upgrade --no-cache-dir torch torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/cu121 && \
-    pip install --upgrade --no-cache-dir xformers
+    pip install --upgrade --no-cache-dir xformers && \
+    apt-get install -y --no-install-recommends libglib2.0-0 libgl1-mesa-glx
 
 # Install StreamDiffusion dependencies first
 RUN pip install --upgrade --no-cache-dir tensorrt && \
@@ -62,9 +63,6 @@ RUN pip install --upgrade --no-cache-dir tensorrt && \
 # Install StreamDiffusion with pip
 RUN pip install --upgrade --no-cache-dir streamdiffusion
 
-# Install TensorRT tools
-# RUN python -m streamdiffusion.tools.install-tensorrt
-
 # Install ComfyUI and ComfyUI Manager
 RUN git clone https://github.com/comfyanonymous/ComfyUI.git && \
     cd /ComfyUI && \
@@ -72,6 +70,11 @@ RUN git clone https://github.com/comfyanonymous/ComfyUI.git && \
     git clone https://github.com/ltdrdata/ComfyUI-Manager.git custom_nodes/ComfyUI-Manager && \
     cd custom_nodes/ComfyUI-Manager && \
     pip install -r requirements.txt
+
+# Install InvokeAI
+RUN mkdir -p /invokeai && \
+    cd /invokeai && \
+    uv pip install invokeai --python 3.12 --python-preference only-managed --force-reinstall
 
 # Install Filebrowser
 # Create a non-root user for brew install
