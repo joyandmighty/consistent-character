@@ -52,8 +52,7 @@ RUN pip install --upgrade --no-cache-dir jupyter
 RUN pip install --upgrade --no-cache-dir huggingface_hub && \
     pip install --upgrade --no-cache-dir diffusers && \
     pip install --upgrade --no-cache-dir torch torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/cu121 && \
-    pip install --upgrade --no-cache-dir xformers && \
-    apt-get install -y --no-install-recommends libglib2.0-0 libgl1-mesa-glx
+    pip install --upgrade --no-cache-dir xformers
 
 # Install StreamDiffusion dependencies first
 RUN pip install --upgrade --no-cache-dir tensorrt && \
