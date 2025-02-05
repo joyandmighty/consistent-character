@@ -1,3 +1,25 @@
+# 🔖 1.4.0 (2025-02-05)
+
+## Docker Image
+
+```bash
+# Latest version
+docker pull ghcr.io/imamik/consistent-character:1.4.0
+
+# Or use latest tag
+docker pull ghcr.io/imamik/consistent-character:latest
+```
+
+## Changes
+
+### 🚀 Features
+
+* Enhance Dockerfile with CUDA and cuDNN optimizations ([e745978](https://github.com/imamik/consistent-character/commit/e7459781a18205a9f81142d6148b80b930e1c3a1))
+
+### ♻️ Refactor
+
+* Simplify model download script output ([5db4b31](https://github.com/imamik/consistent-character/commit/5db4b31f9f475f99f6efbdd858f1f63cbbe50ff9))
+
 # 🔖 1.3.1 (2025-02-05)
 
 ## Docker Image
