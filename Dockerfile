@@ -7,9 +7,6 @@ ENV TORCH_CUDA_ALLOC_CONF=max_split_size_mb:64
 COPY scripts/ /
 RUN chmod +x /pre_start.sh /download_models.sh /install_custom_nodes.sh
 
-# Copy the ComfyUI data
-COPY input/ /ComfyUI/input/
-
 # Install Filebrowser and uv tool
 RUN curl -fsSL https://raw.githubusercontent.com/filebrowser/get/master/get.sh | bash
 
@@ -46,6 +43,9 @@ RUN git clone https://github.com/comfyanonymous/ComfyUI.git && \
     pip install -r requirements.txt
 
 RUN /install_custom_nodes.sh
+
+# Copy the ComfyUI data
+COPY input/ /ComfyUI/input/
 
 # Add version argument, label & file
 ARG VERSION="dev"
