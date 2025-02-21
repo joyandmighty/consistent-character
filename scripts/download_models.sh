@@ -61,8 +61,8 @@ download_model \
 
 # UltraSharp upscaler
 download_model \
-    "https://huggingface.co/Kim2091/UltraSharp/resolve/main/4x-UltraSharp.pth" \
-    "$WORKSPACE_PATH/upscale_models/4x-UltraSharp.pth"
+    "https://huggingface.co/Kim2091/UltraSharp/resolve/main/4x-UltraSharp.safetensors?download=true" \
+    "$WORKSPACE_PATH/upscale_models/4x-UltraSharp.safetensors"
 download_model \
     "https://huggingface.co/Kim2091/ClearRealityV1/resolve/main/4x-ClearRealityV1.safetensors?download=true" \
     "$WORKSPACE_PATH/upscale_models/4x-ClearRealityV1.safetensors"
