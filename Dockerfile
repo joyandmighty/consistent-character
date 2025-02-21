@@ -27,7 +27,8 @@ RUN python3 -m venv /venv && /venv/bin/python -m ensurepip && /venv/bin/python -
 ENV PATH="/venv/bin:$PATH"
 
 # Install additional Python dependencies in venv
-RUN python -m pip install --no-cache-dir --no-build-isolation huggingface_hub diffusers xformers tensorrt nvidia-pyindex nvidia-tensorrt streamdiffusion
+RUN python -m pip install --no-cache-dir --no-build-isolation \
+    huggingface_hub diffusers xformers nvidia-pyindex nvidia-tensorrt streamdiffusion
 
 # Clone and set up ComfyUI and ComfyUI Manager
 RUN git clone https://github.com/comfyanonymous/ComfyUI.git && \
