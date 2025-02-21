@@ -43,12 +43,16 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          RESULT=$(npx semantic-release --dry-run)
-          VERSION=$(echo "$RESULT" | grep -oP "The next release version is \K[0-9]+\.[0-9]+\.[0-9]+" || echo "")
-          if [ ! -z "$VERSION" ]; then
+          RESULT=$(npx semantic-release --dry-run 2>&1 || true)
+          echo "Semantic Release Output:"
+          echo "$RESULT"
+          if echo "$RESULT" | grep -q "The next release version is"; then
+            VERSION=$(echo "$RESULT" | grep -oP "The next release version is \K[0-9]+\.[0-9]+\.[0-9]+")
             echo "new_version=$VERSION" >> $GITHUB_OUTPUT
             echo "should_release=true" >> $GITHUB_OUTPUT
+            echo "Found version: $VERSION"
           else
+            echo "No new version detected"
             echo "new_version=" >> $GITHUB_OUTPUT
             echo "should_release=false" >> $GITHUB_OUTPUT
           fi
