@@ -13,7 +13,7 @@ WORKDIR /
 # Install additional system packages and CUDNN
 RUN apt-get update --yes && \
     apt-get install --yes --no-install-recommends \
-    libcudnn8 libcudnn8-dev python3-venv && \
+    libcudnn8 libcudnn8-dev python3-venv rsync && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
@@ -23,7 +23,7 @@ RUN if [ -f /usr/lib/x86_64-linux-gnu/libcudnn_adv.so.8 ]; then \
     fi
 
 # Create and activate virtual environment
-RUN python3 -m venv /venv && /venv/bin/python -m ensurepip && /venv/bin/python -m pip install --upgrade pip==22.0.4 setuptools wheel
+RUN python3 -m venv /venv && /venv/bin/python -m ensurepip && /venv/bin/python -m pip install --upgrade pip setuptools wheel
 ENV PATH="/venv/bin:$PATH"
 
 # Install additional Python dependencies in venv
