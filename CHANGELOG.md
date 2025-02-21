@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/joyandmighty/consistent-character/compare/v1.0.0...v1.1.0) (2025-02-21)
+
+
+### Features
+
+* implement Python virtual environment in container ([c78bb95](https://github.com/joyandmighty/consistent-character/commit/c78bb95da171559fb2e80762d8a728ae43ac8d59))
+
 # 1.0.0 (2025-02-21)
 
 
