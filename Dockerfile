@@ -22,9 +22,12 @@ RUN apt-get update --yes && \
     apt-get upgrade --yes && \
     apt-get install --yes --no-install-recommends \
     git wget curl bash libgl1 software-properties-common openssh-server nginx rsync \
-    build-essential gcc g++ && \
+    build-essential gcc g++ python3-apt && \
     # Install system-level cuDNN libraries; note: PyTorch wheels include their own cuDNN but these are needed by other components
     apt-get install -y --no-install-recommends libcudnn8 libcudnn8-dev && \
+    # Ensure apt_pkg is correctly linked
+    cd /usr/lib/python3/dist-packages && \
+    ln -s apt_pkg.cpython-*.so apt_pkg.so && \
     add-apt-repository ppa:deadsnakes/ppa && \
     apt-get install -y --no-install-recommends \
     python3.12 \
