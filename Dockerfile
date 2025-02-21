@@ -1,4 +1,4 @@
-FROM runpod/pytorch:2.4.0-py3.11-cuda12.4.1-devel-ubuntu22.04 AS base
+FROM runpod/pytorch:2.4.0-py3.11-cuda12.4.1-devel-ubuntu22.04
 
 # Add version argument and label
 ARG VERSION="dev"
@@ -13,7 +13,7 @@ WORKDIR /
 # Install additional system packages and CUDNN
 RUN apt-get update --yes && \
     apt-get install --yes --no-install-recommends \
-    libcudnn8 libcudnn8-dev && \
+    libcudnn8 libcudnn8-dev python3-venv && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
@@ -22,8 +22,13 @@ RUN if [ -f /usr/lib/x86_64-linux-gnu/libcudnn_adv.so.8 ]; then \
     ln -sf /usr/lib/x86_64-linux-gnu/libcudnn_adv.so.8 /usr/lib/x86_64-linux-gnu/libcudnn_adv.so.9; \
     fi
 
-# Install additional Python dependencies
-RUN pip install --upgrade --no-cache-dir \
+# Create and activate virtual environment
+RUN python3 -m venv /venv
+ENV PATH="/venv/bin:$PATH"
+
+# Install additional Python dependencies in venv
+RUN pip install --upgrade --no-cache-dir pip && \
+    pip install --no-cache-dir \
     huggingface_hub diffusers \
     xformers tensorrt nvidia-pyindex nvidia-tensorrt streamdiffusion
 
