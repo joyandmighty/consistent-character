@@ -46,7 +46,8 @@ RUN if [ -f /usr/lib/x86_64-linux-gnu/libcudnn_adv.so.8 ]; then \
     fi
 
 # Set up Python and pip
-RUN ln -s /usr/bin/python3.12 /usr/bin/python && \
+RUN if [ -L /usr/bin/python ]; then rm /usr/bin/python; fi && \
+    ln -s /usr/bin/python3.12 /usr/bin/python && \
     rm /usr/bin/python3 && \
     ln -s /usr/bin/python3.12 /usr/bin/python3 && \
     curl -fsSL https://bootstrap.pypa.io/get-pip.py -o get-pip.py && \
