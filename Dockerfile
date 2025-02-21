@@ -23,7 +23,7 @@ RUN if [ -f /usr/lib/x86_64-linux-gnu/libcudnn_adv.so.8 ]; then \
     fi
 
 # Create and activate virtual environment
-RUN python3 -m venv /venv
+RUN python3 -m venv /venv && /venv/bin/python -m ensurepip --upgrade
 ENV PATH="/venv/bin:$PATH"
 
 # Install additional Python dependencies in venv
