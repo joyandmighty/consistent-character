@@ -13,11 +13,6 @@ rsync -av /venv/ /workspace/venv/
 rm -rf /venv
 ln -sf /workspace/venv /venv
 
-# Link InvokeAI workspace
-rsync -av /invokeai/ /workspace/invokeai/
-rm -rf /invokeai
-ln -sf /workspace/invokeai /invokeai
-
 # Sync initial models from ComfyUI to workspace and remove original
 rsync -av /ComfyUI/models/ /workspace/models/
 rm -rf /ComfyUI/models
