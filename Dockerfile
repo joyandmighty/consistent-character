@@ -1,14 +1,17 @@
 FROM runpod/pytorch:2.4.0-py3.11-cuda12.4.1-devel-ubuntu22.04
 
-# Add version argument and label
-ARG VERSION="dev"
-LABEL org.opencontainers.image.version=${VERSION}
-
 # Setting Torch CUDA Alloc conf to mitigate potential GPU out-of-memory issues
 ENV TORCH_CUDA_ALLOC_CONF=max_split_size_mb:64
-ENV VERSION=$VERSION
 
-WORKDIR /
+# Copy startup scripts and grant execution permissions
+COPY scripts/ /
+RUN chmod +x /pre_start.sh /download_models.sh /install_custom_nodes.sh
+
+# Copy the ComfyUI data
+COPY input/ /ComfyUI/input/
+
+# Install Filebrowser and uv tool
+RUN curl -fsSL https://raw.githubusercontent.com/filebrowser/get/master/get.sh | bash
 
 # Install additional system packages and CUDNN
 RUN apt-get update --yes && \
@@ -42,22 +45,12 @@ RUN git clone https://github.com/comfyanonymous/ComfyUI.git && \
     cd custom_nodes/ComfyUI-Manager && \
     pip install -r requirements.txt
 
-# Install Filebrowser and uv tool
-RUN curl -fsSL https://raw.githubusercontent.com/filebrowser/get/master/get.sh | bash
-
-# Set up NGINX Proxy
-COPY README.md /usr/share/nginx/html/README.md
-
-# Copy the ComfyUI data
-COPY input/ /ComfyUI/input/
-
-# Copy startup scripts and grant execution permissions
-COPY scripts/ /
-RUN chmod +x /pre_start.sh /download_models.sh /install_custom_nodes.sh
-
 RUN /install_custom_nodes.sh
 
-# Write version info
+# Add version argument, label & file
+ARG VERSION="dev"
+ENV VERSION=$VERSION
+LABEL org.opencontainers.image.version=${VERSION}
 RUN echo $VERSION > VERSION
 
 CMD [ "/start.sh" ]
