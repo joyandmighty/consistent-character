@@ -28,10 +28,11 @@ ENV PATH="/venv/bin:$PATH"
 
 # Install other Python dependencies with build isolation disabled (if needed)
 RUN python -m pip install --no-cache-dir --no-build-isolation \
-    huggingface_hub diffusers xformers streamdiffusion && \
-    # Install NVIDIA packages with default (isolated) build environment so that
-    # tensorrt and its dependencies (e.g., tensorrt_cu12) build correctly
-    python -m pip install --no-cache-dir nvidia-pyindex nvidia-tensorrt
+    huggingface_hub diffusers xformers streamdiffusion
+
+# Install NVIDIA packages with default (isolated) build environment so that
+# tensorrt and its dependencies (e.g., tensorrt_cu12) build correctly
+RUN python -m pip install --no-cache-dir nvidia-pyindex nvidia-tensorrt
 
 # Clone and set up ComfyUI and ComfyUI Manager
 RUN git clone https://github.com/comfyanonymous/ComfyUI.git && \
