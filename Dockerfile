@@ -26,9 +26,12 @@ RUN if [ -f /usr/lib/x86_64-linux-gnu/libcudnn_adv.so.8 ]; then \
 RUN python3 -m venv /venv && /venv/bin/python -m ensurepip && /venv/bin/python -m pip install --upgrade pip setuptools wheel
 ENV PATH="/venv/bin:$PATH"
 
-# Install additional Python dependencies in venv
+# Install other Python dependencies with build isolation disabled (if needed)
 RUN python -m pip install --no-cache-dir --no-build-isolation \
-    huggingface_hub diffusers xformers nvidia-pyindex nvidia-tensorrt streamdiffusion
+    huggingface_hub diffusers xformers streamdiffusion && \
+    # Install NVIDIA packages with default (isolated) build environment so that
+    # tensorrt and its dependencies (e.g., tensorrt_cu12) build correctly
+    python -m pip install --no-cache-dir nvidia-pyindex nvidia-tensorrt
 
 # Clone and set up ComfyUI and ComfyUI Manager
 RUN git clone https://github.com/comfyanonymous/ComfyUI.git && \
