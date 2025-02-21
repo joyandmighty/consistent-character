@@ -118,7 +118,7 @@ jobs:
           labels: ${{ steps.meta.outputs.labels }}
           platforms: linux/amd64
           cache-from: type=local,src=${{ runner.temp }}/.buildx-cache
-          cache-to: type=local,dest=${{ runner.temp }}/.buildx-cache-new,mode=max,compression=none
+          cache-to: type=local,dest=${{ runner.temp }}/.buildx-cache-new,mode=max
 
       - name: Update Docker layer cache
         run: |
