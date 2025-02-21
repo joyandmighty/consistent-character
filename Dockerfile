@@ -1,4 +1,4 @@
-FROM nvidia/cuda:12.1.0-base-ubuntu20.04 AS base
+FROM runpod/pytorch:2.4.0-py3.11-cuda12.4.1-devel-ubuntu22.04 AS base
 
 # Add version argument and label
 ARG VERSION="dev"
@@ -60,7 +60,7 @@ RUN pip install --upgrade --no-cache-dir pip setuptools wheel
 # Install main Python dependencies in correct order
 RUN pip install --upgrade --no-cache-dir \
     huggingface_hub diffusers \
-    torch torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/cu121 \
+    torch torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/cu124 \
     xformers
 
 # Install additional dependencies for StreamDiffusion and others
