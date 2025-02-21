@@ -39,8 +39,6 @@ RUN git clone https://github.com/comfyanonymous/ComfyUI.git && \
 RUN curl -fsSL https://raw.githubusercontent.com/filebrowser/get/master/get.sh | bash
 
 # Set up NGINX Proxy
-COPY proxy/nginx.conf /etc/nginx/nginx.conf
-COPY proxy/readme.html /usr/share/nginx/html/readme.html
 COPY README.md /usr/share/nginx/html/README.md
 
 # Copy the ComfyUI data
