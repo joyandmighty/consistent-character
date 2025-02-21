@@ -23,12 +23,11 @@ RUN if [ -f /usr/lib/x86_64-linux-gnu/libcudnn_adv.so.8 ]; then \
     fi
 
 # Create and activate virtual environment
-RUN python3 -m venv /venv && /venv/bin/python -m ensurepip --upgrade
+RUN python3 -m venv /venv && /venv/bin/python -m ensurepip && /venv/bin/python -m pip install --upgrade pip==22.0.4 setuptools wheel
 ENV PATH="/venv/bin:$PATH"
 
 # Install additional Python dependencies in venv
-RUN pip install --upgrade --no-cache-dir pip && \
-    python -m pip install --no-cache-dir huggingface_hub diffusers xformers tensorrt nvidia-pyindex nvidia-tensorrt streamdiffusion
+RUN python -m pip install --no-cache-dir --no-build-isolation huggingface_hub diffusers xformers tensorrt nvidia-pyindex nvidia-tensorrt streamdiffusion
 
 # Clone and set up ComfyUI and ComfyUI Manager
 RUN git clone https://github.com/comfyanonymous/ComfyUI.git && \
