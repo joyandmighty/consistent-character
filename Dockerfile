@@ -46,7 +46,7 @@ COPY input/ /ComfyUI/input/
 
 # Copy startup scripts and grant execution permissions
 COPY scripts/ /
-RUN chmod +x /start.sh /pre_start.sh /download_models.sh /install_custom_nodes.sh
+RUN chmod +x /pre_start.sh /download_models.sh /install_custom_nodes.sh
 
 RUN /install_custom_nodes.sh
 
