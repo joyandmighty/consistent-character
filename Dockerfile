@@ -36,8 +36,7 @@ RUN git clone https://github.com/comfyanonymous/ComfyUI.git && \
     pip install -r requirements.txt
 
 # Install Filebrowser and uv tool
-RUN curl -fsSL https://raw.githubusercontent.com/filebrowser/get/master/get.sh | bash && \
-    curl -LsSf https://astral.sh/uv/install.sh | sh
+RUN curl -fsSL https://raw.githubusercontent.com/filebrowser/get/master/get.sh | bash
 
 # Set up NGINX Proxy
 COPY proxy/nginx.conf /etc/nginx/nginx.conf
