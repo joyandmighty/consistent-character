@@ -1,3 +1,11 @@
+# [1.2.0](https://github.com/joyandmighty/consistent-character/compare/v1.1.2...v1.2.0) (2025-02-22)
+
+
+### Features
+
+* add installation completion check to ComfyUI setup script ([c718332](https://github.com/joyandmighty/consistent-character/commit/c7183324a94c987d6e5682f6199340be029cf33e))
+* add state tracking to ComfyUI installation script ([b46bf66](https://github.com/joyandmighty/consistent-character/commit/b46bf66e65cbde2a97343653deb4fa4048723a6e))
+
 ## [1.1.2](https://github.com/joyandmighty/consistent-character/compare/v1.1.1...v1.1.2) (2025-02-22)
 
 ## [1.1.1](https://github.com/joyandmighty/consistent-character/compare/v1.1.0...v1.1.1) (2025-02-21)
