@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# Assuming we're in the ComfyUI/custom_nodes directory
-CUSTOM_NODES_PATH="/ComfyUI/custom_nodes"
+# Accept CUSTOM_NODES_PATH as first argument, defaulting to /ComfyUI/custom_nodes
+CUSTOM_NODES_PATH="${1:-/workspace/ComfyUI/custom_nodes}"
 
 # Array of repositories to clone
 REPOS=(

@@ -5,7 +5,7 @@ ENV TORCH_CUDA_ALLOC_CONF=max_split_size_mb:64
 
 # Copy startup scripts and grant execution permissions
 COPY scripts/ /
-RUN chmod +x /pre_start.sh /download_models.sh /install_custom_nodes.sh
+RUN chmod +x /pre_start.sh /download_models.sh /install_custom_nodes.sh /install_comfy.sh
 
 # Install Filebrowser and uv tool
 RUN curl -fsSL https://raw.githubusercontent.com/filebrowser/get/master/get.sh | bash
@@ -22,30 +22,8 @@ RUN if [ -f /usr/lib/x86_64-linux-gnu/libcudnn_adv.so.8 ]; then \
     ln -sf /usr/lib/x86_64-linux-gnu/libcudnn_adv.so.8 /usr/lib/x86_64-linux-gnu/libcudnn_adv.so.9; \
     fi
 
-# Create and activate virtual environment
-RUN python3 -m venv /venv && /venv/bin/python -m ensurepip && /venv/bin/python -m pip install --upgrade pip setuptools wheel
-ENV PATH="/venv/bin:$PATH"
-
-# Install other Python dependencies with build isolation disabled (if needed)
-RUN python -m pip install --no-cache-dir --no-build-isolation \
-    huggingface_hub diffusers xformers streamdiffusion
-
-# Install NVIDIA packages with default (isolated) build environment so that
-# tensorrt and its dependencies (e.g., tensorrt_cu12) build correctly
-RUN python -m pip install --no-cache-dir nvidia-pyindex nvidia-tensorrt
-
-# Clone and set up ComfyUI and ComfyUI Manager
-RUN git clone https://github.com/comfyanonymous/ComfyUI.git && \
-    cd /ComfyUI && \
-    pip install -r requirements.txt && \
-    git clone https://github.com/ltdrdata/ComfyUI-Manager.git custom_nodes/ComfyUI-Manager && \
-    cd custom_nodes/ComfyUI-Manager && \
-    pip install -r requirements.txt
-
-RUN /install_custom_nodes.sh
-
-# Copy the ComfyUI data
-COPY input/ /ComfyUI/input/
+# Copy the ComfyUI input data to a temporary location
+COPY input/ /tmp/comfy_input
 
 # Add version argument, label & file
 ARG VERSION="dev"
