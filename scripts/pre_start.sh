@@ -2,19 +2,13 @@
 
 export PYTHONUNBUFFERED=1
 
-# Create workspace directories if they don't exist
-mkdir -p /workspace/models
-mkdir -p /workspace/output
-mkdir -p /workspace/input
-mkdir -p /workspace/venv
-
-# Copy venv to workspace
-tar -C /venv -cf - . | tar -C /workspace/venv -xf - > /dev/null 2>&1
-rm -rf /venv
-
-# Copy ComfyUI directory to workspace
-tar -C /ComfyUI -cf - . | tar -C /workspace/ComfyUI -xf - > /dev/null 2>&1
-rm -rf /ComfyUI
+# Run the installation script to set up ComfyUI and environment
+if [ -x /install_comfy.sh ]; then
+    /install_comfy.sh
+else
+    echo "install_comfy.sh not found or not executable"
+    exit 1
+fi
 
 # Start filebrowser
 filebrowser --address=0.0.0.0 --port=4040 --root=/ --noauth &
