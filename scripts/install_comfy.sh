@@ -7,6 +7,12 @@ if [ ! -f "$STATE_LOCK" ]; then
   touch "$STATE_LOCK"
 fi
 
+# Check if installation is already complete
+if grep -q "INSTALL_COMPLETE=1" "$STATE_LOCK"; then
+  echo "Installation already complete, skipping execution."
+  exit 0
+fi
+
 # Step 1: Python environment setup and dependency installation
 if grep -q "PYTHON_SETUP=1" "$STATE_LOCK"; then
   echo "Python environment already set up, skipping..."
